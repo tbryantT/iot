@@ -1,0 +1,15 @@
+server:
+  port: 7890
+spring:
+  datasource:
+    driver-class-name: org.apache.phoenix.jdbc.PhoenixDriver
+    url: jdbc:phoenix:30.1.1.16,30.1.1.17,30.1.1.18:12181
+    # url: jdbc:phoenix:10.6.203.87,10.6.203.88,10.6.203.89:2181
+    type: com.alibaba.druid.pool.DruidDataSource
+    dbcp2:
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+mybatis:
+  type-aliases-package: com.chinaunicom.iot.entity
+  mapper-locations: mapper/*.xml

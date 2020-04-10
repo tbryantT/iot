@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chinaunicom.iot.mapper.IotMapper">
+
+    <resultMap id="IotResult" type="com.chinaunicom.iot.entity.IotDmpBusEntity">
+        <result property="serialNumber" column="serialNumber" />
+        <result property="timeStamp" column="timestamp" />
+        <result property="reportType" column="reportType" />
+        <result property="messageType" column="messageType" />
+        <result property="groupName" column="groupName" />
+        <result property="projectName" column="projectName" />
+        <result property="deviceType" column="deviceType" />
+        <result property="maker" column="maker" />
+        <result property="value" column="iotValue" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    		SERIALNUMBER,
+    		TIMESTAMP,
+    		REPORTTYPE,
+    		MESSAGETYPE,
+    		GROUPNAME,
+    		PROJECTNAME,
+    		DEVICETYPE,
+    		MAKER,
+    		IOTVALUE
+	</sql>
+
+    <insert id="upSertIot" parameterType="com.chinaunicom.iot.entity.IotDmpBusEntity">
+        UPSERT INTO IOT_DMP_BUS_TB(serialNumber, timestamp,reportType,messageType,groupName,projectName,deviceType,maker,iotValue)
+        VALUES(#{serialNumber}, #{timeStamp},#{reportType},#{messageType},#{groupName},#{projectName},#{deviceType},#{maker},#{value})
+    </insert>
+
+    <!-- 根据serialNumber查询 -->
+    <select id="selectBySerialNumber" resultMap="IotResult" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List" />
+        from IOT_DMP_BUS_TB
+        where SERIALNUMBER = #{_parameter}
+    </select>
+
+</mapper>
